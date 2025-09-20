@@ -1,0 +1,231 @@
+/* MatchingEvaluation.css
+   Styles for MatchingEvaluation.jsx (no JS changes required)
+*/
+
+/* Container */
+.matching-container {
+  padding: 20px 16px;
+  border-radius: 12px;
+  /* font-family: "Inter", Arial, sans-serif; */
+  background: #ffffff;
+  color: #05051e;
+  box-sizing: border-box;
+}
+
+/* -------start */
+/* Make sure nothing gets clipped */
+.matching-container,
+.capture-wrapper {
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+/* Header area: title + meta (center) and download (right) */
+.matching-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #e6e9ee;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+/* Title block (center) */
+.title-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-and-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.job-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #05051e;
+  line-height: 1.15;
+}
+
+.job-id {
+  font-size: 13px;
+  color: #60607d;
+}
+
+/* Optional short description (ellipsis) */
+.job-desc-short {
+  font-size: 13px;
+  color: #60607d;
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tech-stack badges */
+.tech-stack {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.tech-badge {
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #111827;
+  border: 1px solid #e6e9ee;
+}
+
+/* Right area (download button) */
+.right {
+  display: flex;
+  align-items: center;
+  min-width: 140px;
+  justify-content: flex-end;
+}
+
+/* Download button — styled like Upload JD */
+.download-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #05051e !important;
+  /* same dark ink as Upload JD */
+  color: #ffffff !important;
+  border: none !important;
+  padding: 12px 20px;
+  border-radius: 0 !important;
+  /* sharp edges */
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+  transition: background 160ms ease, color 120ms ease;
+  white-space: nowrap !important;
+}
+
+/* Hover state — medium gray */
+.download-btn:hover {
+  background: #aeaebc !important;
+  color: #ffffff !important;
+}
+
+/* Active (pressed) — slightly darker gray */
+.download-btn:active {
+  background: #aeaebc !important;
+}
+
+/* Disabled state */
+.download-btn[disabled],
+.download-btn.disabled {
+  background: #cbd7ff;
+  color: #ffffff;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+/* Remove focus glow but keep accessibility */
+.download-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Placeholder to keep right column width consistent when button hidden */
+.download-placeholder {
+  width: 120px;
+  height: 34px;
+}
+
+/* Buttons row (kept minimal in your JS — left intentionally simple) */
+.buttons-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  gap: 12px;
+}
+
+/* Section titles */
+.table-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 22px 0 12px;
+  color: #05051e;
+}
+
+/* Wrappers for captured elements (for html2canvas/pdf) */
+.capture-wrapper {
+  padding: 14px;
+  
+  background: #fff;
+  margin-bottom: 18px;
+
+}
+
+/* Ensure captured elements fill width for consistent PDF layout */
+#capture-table,
+#capture-chart {
+  width: 100%;
+}
+
+/* Print/export friendly adjustments */
+.capture-wrapper * {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Focus outlines for keyboard users */
+.download-btn:focus,
+.tech-badge:focus {
+  outline: 3px solid rgba(37, 99, 235, 0.12);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Responsive behavior */
+@media (max-width: 920px) {
+  .job-desc-short {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .matching-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .right {
+    justify-content: flex-start;
+    min-width: auto;
+  }
+
+  .capture-wrapper {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 520px) {
+  .matching-container {
+    padding: 16px 12px;
+  }
+
+  .job-title {
+    font-size: 18px;
+  }
+
+  .download-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+}

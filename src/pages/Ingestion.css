@@ -1,0 +1,423 @@
+/* ------------------------------
+   Ingestion.css - combined styles
+   ------------------------------ */
+
+/* ---------- Upload container / box ---------- */
+
+
+h2 {
+  margin-bottom: 20px;
+  color: #05051E;
+}
+
+/* Upload box */
+.upload-box {
+  border: 2px dashed #bbb;
+  background: #fff;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(40, 51, 71, 0.08);
+  margin: 0 auto 30px auto;
+  max-width: 100%;
+}
+
+.upload-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.cloud-logo {
+  flex: 0 0 auto;
+  margin-right: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.upload-instructions {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.drag-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #60607d;
+}
+
+.detail-text {
+  font-size: 14px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.upload-csv-btn {
+  flex: 0 0 auto;
+  background: #05051e !important;
+  color: #ffffff !important;
+  padding: 11px 27px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+  transition: background .2s, transform .08s;
+  outline: none;
+  position: relative;
+  margin-left: 24px;
+  display: inline-block;
+  border-radius: 8px;
+}
+.upload-csv-btn:hover {
+  background: #3a3a4a !important;
+  color: #ffffff !important;
+}
+.upload-csv-btn:active {
+  transform: translateY(1px);
+}
+.file-input {
+  display: none;
+}
+
+/* textarea / upload text area */
+.upload-textarea {
+  width: 74vw;
+  max-width: 100%;
+  height: 150px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--dentsu-midgrey, #d0d0d4);
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.upload-textarea:focus {
+  border-color: var(--dentsu-link-blue, #007eff);
+  box-shadow: 0 0 6px rgba(0, 126, 255, 0.14);
+}
+
+.upload-button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--dentsu-link-blue, #007eff);
+  color: var(--dentsu-white, #fff);
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.08s;
+}
+.upload-button:hover {
+  background-color: #0066cc;
+}
+.upload-button:active {
+  transform: scale(0.98);
+}
+
+/* ---------- Table container (main) ---------- */
+.table-container {
+  width: 100%;
+  max-width: 80vw;
+  max-height: 60vh;
+  overflow-x: auto;
+  overflow-y: auto;
+  margin-top: 12px;
+  background: transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* table title (optional) */
+.table-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 24px 0 12px;
+  color: #222433;
+}
+
+/* ---------- Candidate Table (updated styling) ---------- */
+.candidate-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: inherit;
+  font-size: 14px;
+  table-layout: auto;      /* let browser size columns naturally */
+  border: none;
+  min-width: 720px;        /* allows horizontal scroll on small screens */
+}
+
+/* Header: use #60607d */
+.candidate-table thead th {
+  background-color: #60607d;
+  color: #ffffff;
+  padding: 18px 22px;       /* increase horizontal gap */
+  text-align: left;
+  vertical-align: middle;   /* center vertically */
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.4px;
+  text-transform: none;     /* set to uppercase if you want */
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  white-space: nowrap;
+}
+
+/* small extra left padding for first header cell */
+.candidate-table thead th:first-child {
+  padding-left: 28px;
+}
+
+/* Data cells */
+.candidate-table td {
+  padding: 16px 22px;       /* bigger horizontal padding for column gap */
+  vertical-align: middle;   /* center cell content vertically */
+  color: #222433;
+  font-size: 14px;
+  line-height: 1.45;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Alternating rows */
+.candidate-table tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+.candidate-table tbody tr:nth-child(even) {
+  background: #e9e8ea;
+}
+
+/* Hover highlight */
+.candidate-table tbody tr:hover {
+  background: #f4f6f8;
+  transition: background 0.18s ease-in-out;
+}
+
+/* subtle vertical divider lines between columns except first and last */
+.candidate-table th:not(:first-child):not(:last-child),
+.candidate-table td:not(:first-child):not(:last-child) {
+  border-left: 1px solid rgba(34,36,51,0.08);
+}
+
+/* keep the look clean */
+.candidate-table th,
+.candidate-table td {
+  border-right: none;
+  border-bottom: none;
+}
+
+/* column size hints — adjust indices to match your CSV structure:
+   1: Rank, 2: Candidate ID, 3: Score, 4: Skills gaps, 5: Recommended training */
+.candidate-table th:nth-child(1),
+.candidate-table td:nth-child(1) {
+  width: 70px;
+  max-width: 80px;
+  text-align: left;
+}
+
+.candidate-table th:nth-child(2),
+.candidate-table td:nth-child(2) {
+  width: 120px;
+  max-width: 160px;
+  text-align: left; /* change to right if you prefer numbers right-aligned */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.candidate-table th:nth-child(3),
+.candidate-table td:nth-child(3) {
+  width: 80px;
+  max-width: 100px;
+  text-align: right; /* scores are right-aligned */
+  white-space: nowrap;
+}
+
+.candidate-table th:nth-child(4),
+.candidate-table td:nth-child(4) {
+  max-width: 200px;     /* adjust to how wide you want */
+  white-space: nowrap;  /* keep text on one line */
+  overflow: hidden;     /* hide extra text */
+  text-overflow: ellipsis; /* show ... */
+}
+
+
+.candidate-table th:nth-child(5),
+.candidate-table td:nth-child(5) {
+  min-width: 420px; /* recommended training column gets lots of width */
+  text-align: left;
+}
+
+/* accessibility focus */
+.candidate-table tr:focus-within {
+  outline: 3px solid rgba(0,126,255,0.12);
+  outline-offset: -2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+  .candidate-table thead th {
+    padding: 14px 12px;
+    font-size: 13px;
+  }
+  .candidate-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+  .table-container {
+    max-height: 55vh;
+  }
+}
+@media (max-width: 640px) {
+  .candidate-table {
+    min-width: 900px;
+  }
+}
+
+/* ---------- Process Button ---------- */
+.after-table-btn {
+  margin-top: 16px;
+  background-color: #007eff;
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.08s;
+}
+.after-table-btn:hover {
+  background-color: #1864ab;
+}
+.after-table-btn:active {
+  transform: translateY(1px);
+}
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 480px;
+  width: 90%;
+  position: relative;
+  text-align: center;
+  z-index: 10000;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Loader */
+.loader {
+  margin: 20px auto;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Done button - same as Upload CSV */
+.done-btn {
+  background: #05051e !important;
+  color: #ffffff !important;
+  padding: 11px 27px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+  transition: background 0.2s, transform 0.08s;
+  outline: none;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.done-btn:hover {
+  background: #aeaebc !important;
+  color: #ffffff !important;
+}
+
+.done-btn:active {
+  transform: translateY(1px);
+}
+
+
+/* Loader spinner - dark theme */
+.spinner {
+  border: 8px solid #f3f3f3;      /* Light grey */
+  border-top: 8px solid #05051e;  /* Dark (same as Upload CSV button) */
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 2s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* Truncate Skills/Skills gaps cells (single-line ellipsis)
+   and give a pointer cursor to indicate hover tooltip */
+.candidate-table td.skill-truncate {
+  max-width: 240px;       /* tweak width as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: help;           /* shows pointer/tooltip affordance */
+}
+
+/* On small screens allow multi-line in expanded view (optional) */
+@media (max-width: 640px) {
+  .candidate-table td.skill-truncate {
+    max-width: 360px;
+  }
+}
+
+
+/* Process Candidates button - same style as Upload CSV */
+.process-candidates-btn {
+  background: #05051e !important;
+  color: #ffffff !important;
+  padding: 11px 27px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+  transition: background 0.2s, transform 0.08s;
+  outline: none;
+  margin-top: 16px;
+  display: inline-block;
+}
+
+.process-candidates-btn:hover {
+  background: #aeaebc !important;
+  color: #ffffff !important;
+}
+
+.process-candidates-btn:active {
+  transform: translateY(1px);
+}

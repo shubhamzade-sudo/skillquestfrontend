@@ -1,0 +1,188 @@
+/* Header.css - Dentsu-style header with proper brand spacing */
+
+:root {
+  --white: #ffffff;
+  --muted-white: rgba(255,255,255,0.95);
+  --header-height: 76px;
+  --max-width: 1400px;
+  --header-padding-desktop: 10px 28px;
+  --header-padding-mobile: 10px 18px;
+  --brand-left-inset: 6px;
+
+  /* dynamic vars (set via JS) */
+  --u-width: 18px; /* fallback width of 'u' */
+  --a: 24px;       /* fallback brand letter height */
+}
+
+/* Outer header */
+.dq-header {
+  position: relative;
+  z-index: 40;
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  padding: var(--header-padding-desktop);
+  box-shadow: 0 2px 10px rgba(2,6,23,0.1);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+/* vignette overlay */
+.dq-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(1200px 400px at 10% 50%, rgba(0,0,0,0.06), transparent 20%),
+              radial-gradient(1200px 400px at 90% 50%, rgba(0,0,0,0.06), transparent 20%);
+  mix-blend-mode: multiply;
+}
+
+/* inner wrapper */
+.dq-header-inner {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  box-sizing: border-box;
+}
+
+/* LEFT: brand area with isolation padding */
+.dq-brand-wrap {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: content-box;
+
+
+}
+
+/* "dentsu" */
+.dq-brand-bold {
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--white);
+  margin: 0;
+  letter-spacing: 0.4px;
+
+  white-space: nowrap;
+  
+}
+
+/* hidden 'u' measure */
+.dq-measure {
+  position: absolute;
+  visibility: hidden;
+
+}
+
+/* skill + quest container */
+.dq-brand-sub {
+  display: inline-flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--muted-white);
+  margin-left: calc(var(--u-width)); /* guideline: width of 'u' */
+  letter-spacing: 0.4px;
+}
+
+/* skill + quest parts */
+.dq-brand-sub span {
+  display: inline-block;
+}
+
+/* custom gap between skill and quest */
+.dq-brand-sub .dq-gap {
+  width: 0.45em; /* tweak as needed */
+}
+
+/* RIGHT: nav + avatar */
+.dq-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.dq-nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.dq-nav-link {
+  color: rgba(255,255,255,0.95);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: none;
+}
+
+.dq-nav-link:hover { text-decoration: underline; }
+
+.dq-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.95);
+  padding: 7px;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  transition: none;
+}
+
+.dq-nav-link:focus,
+.dq-avatar:focus,
+.dq-brand-bold:focus {
+  outline: 3px solid rgba(0,126,255,0.12);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 1000px) {
+  :root { --header-height: 64px; }
+  .dq-header { padding: 10px 18px; min-height: var(--header-height); }
+  .dq-brand-bold { font-size: 18px; }
+  .dq-brand-sub { font-size: 18px; }
+  .dq-nav-link { font-size: 14px; padding: 6px 8px; }
+  .dq-nav { gap: 14px; }
+}
+
+@media (max-width: 640px) {
+  .dq-header-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 6px 0;
+  }
+  .dq-left {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dq-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+  .dq-brand-sub { display: none; }
+  .dq-brand-bold { font-size: 18px; }
+  .dq-nav-link { font-size: 13px; }
+  .dq-avatar { padding: 8px; font-size: 18px; }
+}

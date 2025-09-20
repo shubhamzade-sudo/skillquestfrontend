@@ -1,0 +1,429 @@
+:root {
+  --radius: 14px;
+  --shadow: 0 6px 18px rgba(5, 5, 30, 0.08);
+
+  --dentsu-blueblack: #05051e;
+  --dentsu-darkgrey: #60607d;
+  --dentsu-midgrey: #aeaeae;
+  --dentsu-lightgrey: #e5e5e9;
+  --dentsu-black: #000000;
+  --dentsu-white: #ffffff;
+  --dentsu-link-blue: #007eff;
+
+  /* --font-primary: Verdana, sans-serif; */
+}
+
+/* Page wrapper */
+* { box-sizing: border-box; }
+body, .joblist-root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-primary);
+}
+
+.joblist-root {
+  margin: 0px auto;
+  padding: 20px;
+  background: transparent;
+  color: var(--dentsu-black);
+}
+
+/* Header: search + single Upload CTA */
+.joblist-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: nowrap;
+}
+
+/* ========== Search (rectangular style) ========== */
+/* wrapper */
+.search-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--dentsu-white);
+  border-radius: 10px;        /* ✅ more rounded, like 1st snippet */
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  box-shadow: none;
+  position: relative;
+  border-radius: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-wrap:focus-within {
+  border-color: #3b82f6;
+ 
+}
+
+/* input */
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+  color: var(--dentsu-blueblack);
+  padding-right: 44px;                 /* room for custom clear button */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* icons */
+.icon.search-icon {
+  color: var(--dentsu-darkgrey);
+  font-size: 16px;
+  z-index: 1;
+}
+
+/* custom clear button placed inside wrapper */
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #2d5fb6;                      /* blue color like screenshot */
+  cursor: pointer;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  border-radius: 6px;
+}
+
+/* hover for clear button */
+.clear-btn:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Hide native browser search clear controls (Chrome/Safari/Edge/IE) */
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-cancel-button,
+.search-input::-webkit-search-results-button,
+.search-input::-webkit-search-results-decoration {
+  display: none;
+}
+.search-input::-ms-clear,
+.search-input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* ========== Upload JD button (ONLY CTA now) ========== */
+/* Sharp (no border-radius) rectangular button — no bouncing or movement */
+.upload-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #030315;               /* deep ink */
+  color: #ffffff !important;
+  border: none !important;
+  padding: 12px 20px;
+  border-radius: 0;                  /* no border radius */
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.12);
+  transition: background 160ms ease, color 120ms ease;
+  white-space: nowrap !important;
+}
+
+/* Hover state: only color/background change — NO transform or box-shadow change */
+.upload-btn:hover {
+  background: #9b9b9b !important;
+  color: #ffffff !important;
+  /* intentionally no transform, no box-shadow changes */
+}
+
+/* Active/pressed — keep stable (no movement) */
+.upload-btn:active {
+  background: #8f8f8f !important;
+}
+
+/* Force square corners in every state and remove focus glow */
+.upload-btn,
+.upload-btn:hover,
+.upload-btn:active,
+.upload-btn:focus {
+  border-radius: 0 !important;
+}
+.upload-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Main */
+.joblist-main {
+  padding: 8px 0 20px;
+}
+
+/* Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Job card */
+.job-card {
+  background: var(--dentsu-white);
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--dentsu-lightgrey);
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  gap: 14px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  position: relative;
+  overflow: hidden;
+  padding-right: 28px;
+}
+.job-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(5, 5, 30, 0.12);
+}
+
+/* Head */
+.job-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-right: 56px;
+  position: relative;
+}
+.job-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dentsu-blueblack);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  max-height: calc(1.2em * 2);
+}
+.jd-id {
+  font-size: 13px;
+  color: var(--dentsu-darkgrey);
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* Delete */
+.delete-small {
+  background: transparent !important;
+  border: none !important;
+  font-size: 20px;
+  color: var(--dentsu-darkgrey);
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 0px;
+  right: -4px;
+  height: 30px;
+  width: 30px;
+  border-radius: 8px;
+}
+
+/* Description */
+.job-desc {
+  margin: 0;
+  color: var(--dentsu-darkgrey);
+  font-size: 14px;
+  line-height: 1.45;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  max-height: calc(1.45em * 5);
+}
+
+/* Footer */
+.job-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.action-btn,
+.edit-btn {
+  border: 1px solid var(--dentsu-lightgrey);
+  background: transparent;
+  padding: 8px 14px;
+  /* border-radius: 8px; */
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--dentsu-blueblack);
+  font-weight: 600;
+}
+.action-btn.primary {
+  border: 1px solid var(--dentsu-link-blue);
+  color: var(--dentsu-link-blue);
+}
+.action-btn.disabled,
+.action-btn[disabled] {
+  background: var(--dentsu-lightgrey);
+  border: 1px dashed var(--dentsu-midgrey);
+  color: var(--dentsu-midgrey);
+  cursor: not-allowed;
+  font-style: italic;
+}
+
+/* Empty state */
+.empty-state {
+  padding: 40px;
+  text-align: center;
+  color: var(--dentsu-darkgrey);
+  font-size: 15px;
+  border-radius: 10px;
+  background: var(--dentsu-lightgrey);
+}
+
+/* -------- Modal -------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7,12,20,0.28);
+  z-index: 3000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+.modal {
+  position: relative;
+  top: 48px;
+  width: 100%;
+  max-width: 680px;
+  background: var(--dentsu-white);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 30px 80px rgba(2,6,23,0.45);
+  border: 1px solid rgba(15,23,42,0.06);
+}
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.modal-head h4 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dentsu-blueblack);
+}
+.modal-close {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--dentsu-darkgrey);
+}
+
+/* Form stacked row by row */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: var(--dentsu-darkgrey);
+  font-weight: 700;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.08);
+  font-size: 15px;
+  color: var(--dentsu-blueblack);
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,251,0.98));
+  outline: none;
+}
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--dentsu-link-blue);
+ 
+}
+.field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Modal actions */
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid var(--dentsu-lightgrey);
+  padding-top: 14px;
+}
+.btn-primary {
+  background: #05051e;
+color: #ffffff ;
+  padding: 10px 18px;
+  
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: #aeaebc !important;
+  color: #ffffff !important;
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--dentsu-darkgrey);
+  padding: 10px 18px;
+
+  border: 1px solid var(--dentsu-lightgrey);
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .upload-btn { padding: 10px 14px; font-size: 14px; }
+}
+@media (max-width: 640px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .search-wrap { padding: 8px 10px; }
+  .job-card-head { padding-right: 48px; }
+  .job-title { font-size: 16px; }
+  .upload-btn { display: block; width: 100%; } /* stretch on small screens */
+}

@@ -1,0 +1,116 @@
+.upload-container {
+  /* font-family already set globally */
+}
+
+.upload-textarea {
+  width: 74vw;
+  height: 150px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--dentsu-midgrey);
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+}
+
+.upload-textarea:focus {
+  border-color: var(--dentsu-link-blue);
+  box-shadow: 0 0 6px rgba(0, 126, 255, 0.3);
+}
+
+.upload-button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--dentsu-link-blue);
+  color: var(--dentsu-white);
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.upload-button:hover {
+  background-color: #0066cc; /* darker link blue */
+}
+
+.upload-button:active {
+  transform: scale(0.97);
+}
+
+/* -------------------- TABLE -------------------- */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Table */
+.candidate-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+  font-size: 14px;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* Header */
+.candidate-table th {
+  background-color: var(--dentsu-darkgrey);
+  color: var(--dentsu-white);
+  padding: 14px 18px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  border-right: 1px solid var(--dentsu-lightgrey);
+  white-space: nowrap;
+  min-width: 120px;
+}
+.candidate-table th:last-child {
+  border-right: none;
+}
+
+/* Data cells */
+.candidate-table td {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: middle;
+  border: none;
+  border-right: 1px solid var(--dentsu-midgrey);
+  color: var(--dentsu-blueblack);
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: normal;
+}
+.candidate-table td:last-child {
+  border-right: none;
+}
+
+/* Alternating rows */
+.candidate-table tbody tr:nth-child(even) {
+  background-color: var(--dentsu-lightgrey);
+}
+.candidate-table tbody tr:nth-child(odd) {
+  background-color: var(--dentsu-white);
+}
+
+/* Hover */
+.candidate-table tbody tr:hover {
+  background-color: #f1f5f9;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Title */
+.table-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-top: 50px;
+  color: var(--dentsu-blueblack);
+  text-align: left;
+}

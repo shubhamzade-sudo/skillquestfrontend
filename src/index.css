@@ -1,0 +1,58 @@
+/* Import Halcom font */
+@font-face {
+  font-family: 'Halcom';
+  src: url('./assets/Halcom.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+:root {
+  /* Brand palette (from guideline image) */
+  --dentsu-blueblack: #05051e;   /* dark background / headings */
+  --dentsu-darkgrey: #60607d;    /* dark grey text / axis */
+  --dentsu-midgrey: #aeaebc;     /* mid grey (subtle text) */
+  --dentsu-lightgrey: #e5e5e9;   /* page backgrounds */
+  --dentsu-black: #000000;       /* primary copy */
+  --dentsu-white: #ffffff;       /* on dark backgrounds */
+  --dentsu-link-blue: #007eff;   /* hyperlinks / charts */
+
+  /* Font */
+  /* --font-primary: Verdana, sans-serif; */
+
+    /* Font */
+  --font-primary: 'Halcom';
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary) !important;
+  font-weight: normal; /* Regular is the base */
+  color: var(--dentsu-black) !important; /* default text is black on light backgrounds */
+  background-color: var(--dentsu-white);
+  line-height: 1.5;
+}
+
+/* Headings & emphasis */
+h1, h2, h3, h4, h5, h6, strong, b {
+  font-weight: bold; /* Bold for headlines & subheadings */
+}
+
+/* Italic text for quotes */
+em, i {
+  font-style: italic;
+}
+
+/* Hyperlinks (exception rule) */
+a {
+  color: var(--dentsu-link-blue);
+  text-decoration: underline;
+}
+
+/* White text for dark sections */
+.dark-bg {
+  background-color: var(--dentsu-blueblack);
+  color: var(--dentsu-white);
+}

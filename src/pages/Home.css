@@ -1,0 +1,125 @@
+/* =========================
+   Home.css (COMPLETE, updated & bigger version)
+   ========================= */
+
+.home {
+  padding: 24px;
+  font-family: var(--font-primary);
+  color: var(--dentsu-black);
+  /* background: var(--dentsu-white); */
+  box-sizing: border-box;
+}
+
+/* Heading */
+.snapshot-heading {
+  font-size: 24px; /* bigger */
+  font-weight: bold;
+  margin: 0 0 22px 0;
+  color: var(--dentsu-blueblack);
+}
+
+/* Snapshot container: grid layout */
+.snapshot {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+/* Cards */
+.card {
+  padding: 18px 22px;
+  background: var(--dentsu-white);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(5, 5, 30, 0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Card heading */
+.card h3 {
+  font-size: 16px;
+  margin: 0;
+  color: var(--dentsu-darkgrey);
+  font-weight: 700;
+}
+
+/* Card value */
+.card p {
+  font-size: 20px;
+  margin: 4px 0 0 0;
+  font-weight: 600;
+  color: var(--dentsu-black);
+}
+
+/* Chart wrapper */
+.chart {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.echart-wrapper {
+  width: 100%;
+  height: 460px; /* larger chart */
+  box-sizing: border-box;
+  padding: 14px;
+  background: var(--dentsu-white);
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(5, 5, 30, 0.05);
+  overflow: visible;
+}
+
+.echart-wrapper > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Tablet view */
+@media (max-width: 900px) {
+  .snapshot-heading {
+    font-size: 22px;
+  }
+  .card {
+    padding: 16px 18px;
+  }
+  .card h3 {
+    font-size: 15px;
+  }
+  .card p {
+    font-size: 22px;
+  }
+  .echart-wrapper {
+    height: 400px;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 600px) {
+  .snapshot {
+    gap: 14px;
+  }
+  .card {
+    flex: 1 1 100%;
+    padding: 14px 16px;
+  }
+  .card h3 {
+    font-size: 14px;
+  }
+  .card p {
+    font-size: 20px;
+  }
+  .echart-wrapper {
+    height: 320px;
+    padding: 10px;
+  }
+}
+
+/* Muted small text (optional helper) */
+.small-muted {
+  color: var(--dentsu-midgrey);
+  font-size: 13px;
+}

@@ -1,0 +1,181 @@
+/* CandidateCards.css
+   Dentsu palette + responsive grid using auto-fit
+*/
+
+:root {
+  --dentsu-blueblack: #05051e;
+  --dentsu-darkgrey: #60607d;
+  --dentsu-link-blue: #007eff;
+  --card-border: #eef5fb;
+  --card-shadow: 0 14px 30px rgba(2,6,23,0.04);
+  --card-shadow-hover: 0 30px 60px rgba(2,6,23,0.06);
+  --radius: 12px;
+}
+
+/* wrapper centers and limits width so large screens don't show too much empty space */
+.candidate-cards-root {
+  width: 100%;
+  max-width: 1200px;       /* reduce empty area on wide monitors */
+  margin: 8px auto 32px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+/* heading */
+.cards-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--dentsu-blueblack);
+  margin: 8px 0 16px;
+}
+
+/* responsive grid uses auto-fit to fill available width nicely */
+.candidate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px 28px;
+  align-items: start;
+  justify-items: stretch;
+  width: 100%;
+}
+
+/* each card */
+.candidate-card {
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 18px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  min-height: 220px; /* slightly larger so cards look balanced */
+  position: relative;
+  cursor: pointer;
+  overflow: visible;
+}
+.candidate-card:hover,
+.candidate-card:focus {
+  transform: translateY(-8px);
+  box-shadow: var(--card-shadow-hover);
+  outline: none;
+}
+
+/* top row id + badge */
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.candidate-id {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dentsu-blueblack);
+}
+
+/* circular badge in top-right */
+.badge {
+  background: var(--dentsu-darkgrey);;
+  color: var(--card-border);
+  font-weight: 700;
+  font-size: 13px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(0,126,255,0.12);
+}
+
+/* body rows - maintain 2-column grid for label/value */
+.card-body {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* label/value layout ensures labels align vertically */
+.line {
+  display: grid;
+  grid-template-columns: 150px 1fr; /* left label column + right value column */
+  gap: 8px 16px;
+  align-items: start;
+}
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dentsu-blueblack);
+  padding-top: 2px;
+}
+.value {
+  font-size: 14px;
+  color: var(--dentsu-darkgrey);
+  line-height: 1.35;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* recommended training: clamp to 3 lines */
+.rec .rec-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: var(--dentsu-blueblack);
+}
+
+/* messages */
+.info, .error {
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+.info {
+  background: #f1f5f9;
+  color: var(--dentsu-blueblack);
+}
+.error {
+  background: #fff1f2;
+  color: #991b1b;
+  border: 1px solid rgba(153,27,27,0.06);
+}
+
+/* small spacing/polish */
+.candidate-card * { box-sizing: border-box; }
+
+/* responsive adjustments: shrink label col on narrower screens */
+@media (max-width: 1200px) {
+  .candidate-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .line { grid-template-columns: 140px 1fr; }
+}
+@media (max-width: 900px) {
+  .candidate-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .candidate-card { min-height: 200px; }
+  .line { grid-template-columns: 120px 1fr; }
+}
+@media (max-width: 520px) {
+  .candidate-grid { grid-template-columns: 1fr; }
+  .candidate-card { min-height: 170px; padding: 14px; }
+  .badge { width: 30px; height: 30px; font-size: 12px; }
+  .line { grid-template-columns: 110px 1fr; }
+  .candidate-id { font-size: 18px; }
+}
+
+
+
+/* Star icon in heading */
+.star-icon {
+  width: 24px;    /* adjust like trophy emoji */
+  height: 24px;
+  flex-shrink: 0;
+  fill: currentColor;   /* lets it inherit text color */
+  color: var(--dentsu-blueblack);
+}

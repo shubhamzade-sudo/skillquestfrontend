@@ -1,0 +1,286 @@
+/* CandidateDetail.css
+   Complete, responsive styles for the Candidate Detail view.
+   Uses Dentsu colour variables from your global :root.
+*/
+
+/* Use app root vars when available */
+:root{
+  --dentsu-blueblack: #05051e;
+  --dentsu-darkgrey: #60607d;
+  --dentsu-midgrey: #aeaecc;
+  --dentsu-lightgrey: #e5e5e9;
+  --dentsu-link-blue: #007eff;
+
+  --bg: #ffffff;
+  --text: #111827;
+  --muted: var(--dentsu-darkgrey);
+  --accent: var(--dentsu-link-blue);
+
+  --radius: 12px;
+  --shadow-soft: 0 6px 18px rgba(2,6,23,0.06);
+  --shadow-strong: 0 18px 40px rgba(2,6,23,0.07);
+}
+
+/* Basic reset */
+* { box-sizing: border-box; }
+
+/* Root container */
+.candidate-detail-root {
+  padding: 28px;
+  font-family: var(--font-primary);
+  color: var(--text);
+  line-height: 1.6;
+  width: 100%;
+  background: transparent;
+}
+
+/* Header container */
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--dentsu-lightgrey);
+  padding-bottom: 16px;
+}
+
+/* Left side: back button + title group */
+.title-with-back {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Back button */
+.back-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  flex: 0 0 auto;
+}
+.back-btn:focus {
+  outline: 3px solid rgba(0,126,255,0.12);
+  outline-offset: 2px;
+}
+
+/* Title + meta */
+.header-inline {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+.header-inline .title-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Title (smaller than before) */
+.header-inline h1,
+.header-inline .job-title {
+  font-size: 22px;   /* reduced from 26px */
+  margin: 0;
+  font-weight: 800;
+  color: var(--dentsu-blueblack);
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90vw;
+}
+
+/* Meta inline */
+.meta-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* Short description */
+.job-desc-short {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
+  max-width: 70ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Score pill */
+.score-pill {
+  background: var(--bg);
+  color: var(--dentsu-blueblack);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  border: 1px solid var(--dentsu-midgrey);
+  display: inline-block;
+}
+
+/* Right side: download button */
+.detail-header .right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.download-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-strong); }
+.download-btn:active { transform: translateY(0); }
+.download-btn:disabled { opacity: 0.6; cursor: default; }
+
+/* Placeholder */
+.download-placeholder { width: 120px; height: 38px; }
+
+/* Section headings */
+section h2,
+section h3 {
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  color: var(--dentsu-blueblack);
+  font-size: 18px;
+}
+
+/* Add consistent gap between sections */
+section {
+  margin-top: 28px;    /* extra spacing before each section */
+  margin-bottom: 12px; /* breathing room below */
+}
+
+/* Content paragraphs */
+.summary,
+.long-text {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Tech badges */
+.tech-stack { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.tech-badge {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #eef2ff;
+}
+
+/* Skills chips */
+.skills-tabs { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.tab {
+  background: var(--bg);
+  border: 1px solid var(--dentsu-midgrey);
+  color: var(--dentsu-blueblack);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+/* .tab:hover { background: #e6f0ff; } */
+
+/* Experience list */
+.experience-list { margin: 0; padding-left: 20px; color: var(--text); line-height: 1.7; }
+.experience-list li { margin: 6px 0; }
+
+/* Training box */
+.training-box {
+  background: #fbfdff;
+  border: 1px solid #e6f0ff;
+  padding: 16px;
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 15px;
+  box-shadow: 0 6px 16px rgba(2,6,23,0.04);
+}
+
+/* KV rows */
+.kv-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 8px 18px;
+  align-items: start;
+  margin-bottom: 8px;
+}
+.kv-label { font-weight: 700; color: var(--dentsu-blueblack); font-size: 14px; }
+.kv-value { color: var(--muted); font-size: 14px; }
+
+/* Empty text */
+.empty-text { color: var(--muted); font-style: italic; }
+
+/* Focus outlines */
+a:focus, button:focus, .tab:focus {
+  outline: 3px solid rgba(0, 126, 255, 0.12);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .header-inline h1 { font-size: 20px; }
+  .job-desc-short { max-width: 55ch; white-space: normal; }
+  .kv-row { grid-template-columns: 140px 1fr; }
+}
+
+@media (max-width: 720px) {
+  .detail-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+  .title-with-back { align-items: flex-start; gap: 12px; width: 100%; }
+  .header-inline { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .header-inline h1 { font-size: 18px; white-space: normal; }
+  .meta-inline { flex-wrap: wrap; white-space: normal; gap: 8px; }
+  .job-desc-short { max-width: 100%; white-space: normal; }
+  .detail-header .right { width: 100%; justify-content: flex-end; }
+  .download-btn { width: auto; }
+  .kv-row { grid-template-columns: 1fr; }
+  .kv-label { margin-bottom: 6px; }
+}
+
+@media (max-width: 420px) {
+  .candidate-detail-root { padding: 16px; }
+  .header-inline h1 { font-size: 17px; }
+  .tech-badge { padding: 6px 8px; font-size: 12px; }
+  .download-btn { padding: 8px 10px; font-size: 14px; }
+  .kv-row { grid-template-columns: 1fr; }
+}
+
+/* Print/export */
+.candidate-detail-root * {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
