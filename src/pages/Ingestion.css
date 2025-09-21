@@ -140,7 +140,7 @@ h2 {
 .candidate-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: inherit;
+  
   font-size: 14px;
   table-layout: auto;      /* let browser size columns naturally */
   border: none;
