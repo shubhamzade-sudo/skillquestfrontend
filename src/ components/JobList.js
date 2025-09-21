@@ -171,7 +171,12 @@ export default function JobList({ goToMatching }) {
 
       <main className="joblist-main">
         {filtered.length === 0 ? (
-          <div className="empty-state">No job descriptions found. Add one!</div>
+          // <div className="empty-state">No job descriptions found. Add one!</div>
+          <div className="empty-state" aria-busy="true" aria-live="polite">
+            <div className="circle-loader" role="status" aria-label="Loading job descriptions"></div>
+          </div>
+
+
         ) : (
           <div className="card-grid">
             {filtered.map((job) => (
