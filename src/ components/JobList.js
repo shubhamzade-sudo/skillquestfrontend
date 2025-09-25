@@ -71,41 +71,42 @@ export default function JobList({ goToMatching }) {
     }, 160);
   };
 
-  const addOrUpdateJob = () => {
-    const title = (newTitle || "").trim();
-    const desc = (newDesc || "").trim() || "No description provided";
-    const jdId = ((newReqId || "") + "").trim();
+const addOrUpdateJob = async () => {
+  const title = (newTitle || "").trim();
+  const desc = (newDesc || "").trim() || "No description provided";
+  const jdId = Number(newReqId);
 
-    if (!title) {
-      alert("Please enter a job title");
-      titleRef.current?.focus();
-      return;
-    }
-    if (!jdId) {
-      alert("Please enter a REQ ID");
-      return;
-    }
+  if (!title || !jdId) {
+    alert("Please enter valid REQ ID and title");
+    return;
+  }
 
-    if (editId) {
-      setJobs((prev) =>
-        prev.map((j) =>
-          String(j.jd_id) === String(editId)
-            ? { ...j, jd_id: jdId, title, description: desc }
-            : j
-        )
-      );
-    } else {
-      const newJob = {
-        jd_id: jdId,
-        title,
-        description: desc,
-        status: "running",
-      };
-      setJobs((prev) => [newJob, ...prev]);
-    }
-
-    closeModal();
+  const payload = {
+    jd_id: jdId,
+    title,
+    description: desc,
+    required_skills: "string",
+    preferred_skills: "string",
+    experience_min: 0,
+    experience_max: 0,
+    location: "string",
+    status: "OPEN",
+    model_status: "DONE"
   };
+
+  setJobs((prev) => [{ jd_id: jdId, title, description: desc, status: "OPEN" }, ...prev]);
+  closeModal();
+
+  if (!API_URL) return;
+
+  try {
+    await axios.post(`${API_URL}/jobs/`, payload);
+    await axios.post(`${API_URL}/snow/jds`, payload);
+  } catch (err) {
+    console.error("Save failed:", err);
+    alert("Failed to save to server");
+  }
+};
 
   const removeJob = (jdId) => {
     setJobs((prev) => prev.filter((j) => String(j.jd_id) !== String(jdId)));
