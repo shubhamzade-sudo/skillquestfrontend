@@ -60,7 +60,7 @@ const MatchingEvaluation = ({ job, onBack }) => {
       setCandidatesLoading(true);
       setCandidatesError(null);
       try {
-        const resp = await axios.get(`${API_BASE}/topevaluation/${job.jd_id}`, {
+        const resp = await axios.get(`${API_BASE}/jd_matching_score/${job.jd_id}`, {
           headers: { accept: "application/json" },
         });
         let data = resp.data;

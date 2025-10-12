@@ -80,3 +80,35 @@
 .chatbot-send:hover {
   background: #1e40af;
 }
+
+
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 12px;
+}
+
+.chatbot-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.chatbot-table th,
+.chatbot-table td {
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.chatbot-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+.chatbot-table tr:nth-child(even) {
+  background: #f9fafb;
+}
