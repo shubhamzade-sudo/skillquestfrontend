@@ -1,13 +1,13 @@
 import React from "react";
 import TabSwitcher from "../ components/TabSwitcher"
 
-const Upload = () => {
+const Dms = () => {
   return (
     <>
     
-    <TabSwitcher title="JD Upload"/>
+    <TabSwitcher title="DMS"/>
     </>
   )
 };
 
-export default Upload;
+export default Dms;

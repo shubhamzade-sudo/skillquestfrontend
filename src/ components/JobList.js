@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { FiSearch, FiX } from "react-icons/fi";
 import "./JobList.css";
 import axios from "axios";
@@ -6,6 +7,9 @@ import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function JobList({ goToMatching }) {
+  const location = useLocation();
+  const isDms = location.pathname.includes("dms");
+
   const [jobs, setJobs] = useState([]);
   const [query, setQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,25 +17,32 @@ export default function JobList({ goToMatching }) {
   const [newDesc, setNewDesc] = useState("");
   const [newReqId, setNewReqId] = useState(""); // REQ ID
   const [editId, setEditId] = useState(null);
+  const [isSearching, setIsSearching] = useState(false);
 
   // Refs
   const titleRef = useRef(null);
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        if (!API_URL) return;
-        const response = await axios.get(`${API_URL}/jobs/`, {
-          params: { skip: 0, limit: 50 },
-          headers: { accept: "application/json" },
-        });
-        setJobs(response.data || []);
-      } catch (error) {
-        console.error("Error fetching jobs:", error);
-      }
-    };
+  const fetchJobs = async () => {
+    try {
+      if (!API_URL) return;
+      setIsSearching(true);
+      const response = await axios.get(`${API_URL}/jobs/`, {
+        params: { skip: 0, limit: 50 },
+        headers: { accept: "application/json" },
+      });
 
+      console.log("Fetched jobs:", response.data);
+      setJobs(response.data || []);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  useEffect(() => {
     fetchJobs();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filtered = useMemo(() => {
@@ -71,7 +82,7 @@ export default function JobList({ goToMatching }) {
     }, 160);
   };
 
-  const addOrUpdateJob = () => {
+  const addOrUpdateJob = async () => {
     const title = (newTitle || "").trim();
     const desc = (newDesc || "").trim() || "No description provided";
     const jdId = ((newReqId || "") + "").trim();
@@ -86,29 +97,54 @@ export default function JobList({ goToMatching }) {
       return;
     }
 
-    if (editId) {
-      setJobs((prev) =>
-        prev.map((j) =>
-          String(j.jd_id) === String(editId)
-            ? { ...j, jd_id: jdId, title, description: desc }
-            : j
-        )
-      );
-    } else {
-      const newJob = {
-        jd_id: jdId,
-        title,
-        description: desc,
-        status: "running",
-      };
-      setJobs((prev) => [newJob, ...prev]);
+    try {
+      if (editId) {
+        // Update existing job
+        const response = await axios.put(`${API_URL}/jobs/${editId}`, {
+          jd_id: parseInt(jdId),
+          title,
+          description: desc,
+          status: "OPEN",
+          model_status: "IN-Progress"
+        }, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        setJobs((prev) =>
+          prev.map((j) =>
+            String(j.jd_id) === String(editId) ? response.data : j
+          )
+        );
+      } else {
+        // Create new job
+        const response = await axios.post(`${API_URL}/jobs/`, {
+          jd_id: parseInt(jdId),
+          title,
+          description: desc,
+          status: "OPEN",
+          model_status: "IN-Progress"
+        }, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        setJobs((prev) => [response.data, ...prev]);
+      }
+      
+      closeModal();
+    } catch (error) {
+      console.error('Error saving job:', error);
+      alert(`Failed to save job: ${error.response?.data?.detail || error.message}`);
     }
-
-    closeModal();
   };
 
-  const removeJob = (jdId) => {
-    setJobs((prev) => prev.filter((j) => String(j.jd_id) !== String(jdId)));
+  const removeJob = async (jdId) => {
+    try {
+      await axios.delete(`${API_URL}/jobs/${jdId}`);
+      setJobs((prev) => prev.filter((j) => String(j.jd_id) !== String(jdId)));
+    } catch (error) {
+      console.error('Error deleting job:', error);
+      alert(`Failed to delete job: ${error.response?.data?.detail || error.message}`);
+    }
   };
 
   useEffect(() => {
@@ -119,20 +155,27 @@ export default function JobList({ goToMatching }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [isModalOpen]);
 
-  const statusLabel = (status) => {
-    switch ((status || "").toLowerCase()) {
-      case "closed":
-        return "View Evaluation";
-      case "running":
-        return "Evaluation in progress";
-      case "completed":
-        return "View Evaluation";
-      default:
-        return "Evaluation in progress";
+  const statusLabel = (status, modelStatus) => {
+    const ms = (modelStatus || "").toLowerCase();
+    const s = (status || "").toLowerCase();
+    
+    if (s === "closed") {
+      return "View Evaluation";
+    } else if (ms === "done") {
+      return "View Evaluation"; 
+    } else if (ms === "in-progress") {
+      return "Evaluation in progress";
+    } else if (ms === "failed") {
+      return "Evaluation failed";
+    } else {
+      return "Evaluation in progress";
     }
   };
 
-  const isActionDisabled = (status) => (status || "").toLowerCase() === "running";
+  const isActionDisabled = (status, modelStatus) => {
+    const ms = (modelStatus || "").toLowerCase();
+    return ms === "in-progress";
+  };
 
   return (
     <div className="joblist-root">
@@ -157,16 +200,28 @@ export default function JobList({ goToMatching }) {
           )}
         </div>
 
-        {/* ONLY Upload JD button — sharp corners, opens modal */}
-        <button
-          className="upload-btn"
-          title="Upload JD"
-          onClick={() => openModal(null)}
-          aria-label="Upload JD"
-          type="button"
-        >
-          Upload JD
-        </button>
+        {isDms ? (
+          <button
+            className={`upload-btn${isSearching ? " disabled" : ""}`}
+            title="Search"
+            onClick={fetchJobs}
+            aria-label="Search"
+            type="button"
+            disabled={isSearching}
+          >
+            {isSearching ? "Searching..." : "Search"}
+          </button>
+        ) : (
+          <button
+            className="upload-btn"
+            title="Upload JD"
+            onClick={() => openModal(null)}
+            aria-label="Upload JD"
+            type="button"
+          >
+            Upload JD
+          </button>
+        )}
       </header>
 
       <main className="joblist-main">
@@ -179,14 +234,14 @@ export default function JobList({ goToMatching }) {
                 key={job.jd_id}
                 className={`job-card ${job.compact ? "compact" : ""}`}
                 onClick={() => {
-                  if (!isActionDisabled(job.status)) {
+                  if (!isActionDisabled(job.status, job.model_status)) {
                     goToMatching?.(job);
                   }
                 }}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
-                  if ((e.key === "Enter" || e.key === " ") && !isActionDisabled(job.status)) {
+                  if ((e.key === "Enter" || e.key === " ") && !isActionDisabled(job.status, job.model_status)) {
                     goToMatching?.(job);
                   }
                 }}
@@ -200,9 +255,11 @@ export default function JobList({ goToMatching }) {
 
                   <button
                     className="delete-small"
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.stopPropagation();
-                      removeJob(job.jd_id);
+                      if (window.confirm(`Delete "${job.title}"?`)) {
+                        await removeJob(job.jd_id);
+                      }
                     }}
                     aria-label="Delete job"
                     title="Delete"
@@ -218,15 +275,15 @@ export default function JobList({ goToMatching }) {
 
                 <div className="job-footer">
                   <button
-                    className={`action-btn ${job.status === "completed" ? "primary" : ""} ${job.status === "running" ? "disabled" : ""}`}
+                    className={`action-btn ${job.status === "CLOSED" || job.model_status === "DONE" ? "primary" : ""} ${isActionDisabled(job.status, job.model_status) ? "disabled" : ""}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (isActionDisabled(job.status)) return;
+                      if (isActionDisabled(job.status, job.model_status)) return;
                       goToMatching?.(job);
                     }}
-                    disabled={isActionDisabled(job.status)}
+                    disabled={isActionDisabled(job.status, job.model_status)}
                   >
-                    {statusLabel(job.status)}
+                    {statusLabel(job.status, job.model_status)}
                   </button>
 
                   <button

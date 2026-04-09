@@ -5,7 +5,7 @@ import { FiArrowLeft, FiChevronLeft } from "react-icons/fi"; // react icon impor
 
 
 
-const TabSwitcher = () => {
+const TabSwitcher = ({ title = "Upload" }) => {
   // "uploader" shows JD Upload, "matching" shows MatchingEvaluation
   const [view, setView] = useState("uploader");
   const [selectedJob, setSelectedJob] = useState(null);
@@ -45,7 +45,7 @@ const TabSwitcher = () => {
 
 
         <h2 style={{ marginLeft: "4px" }}>
-          {view === "uploader" ? "JD Upload" : "Matching & Evaluation"}
+          {view === "uploader" ? title : "Matching & Evaluation"}
         </h2>
 
         {/* When in matching view show a Back button */}

@@ -7,38 +7,53 @@ const Sidebar = () => {
     <aside className="sidebar">
       <ul>
         <li>
-          <NavLink 
-            to="/home" 
+          <NavLink
+            to="/home"
             className={({ isActive }) => (isActive ? "active-link" : "")}
           >
             Home
           </NavLink>
+
+
+       
+
         </li>
 
-          <li>
-          <NavLink 
-            to="/upload" 
+
+
+    <li>
+          <NavLink
+            to="/dms"
             className={({ isActive }) => (isActive ? "active-link" : "")}
           >
-            JD upload
+            DMS
           </NavLink>
         </li>
+   <li>
+            <NavLink
+              to="/upload"
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
+              JD upload
+            </NavLink>
+          </li>
+    
         <li>
-          <NavLink 
-            to="/ingestion" 
+          <NavLink
+            to="/ingestion"
             className={({ isActive }) => (isActive ? "active-link" : "")}
           >
             Ingestion page
           </NavLink>
         </li>
-      
 
-           <li>
-          <NavLink 
-            to="/chatbot" 
+
+        <li>
+          <NavLink
+            to="/chatbot"
             className={({ isActive }) => (isActive ? "active-link" : "")}
           >
-           ChatBot
+            ChatBot
           </NavLink>
         </li>
       </ul>

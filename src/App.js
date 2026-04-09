@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Ingestion from "./pages/Ingestion";
 import Layout from "./ components/Layout";
 import Settings from "./pages/Upload";
+import Dms from "./pages/Dms";
 import Chatbot from "./pages/ChatBot";
 import CandidateDetail from "./ components/CandidateDetail"
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="ingestion" element={<Ingestion />} />
           <Route path="upload" element={<Settings />} />
+           <Route path="dms" element={<Dms />} />
           <Route path="chatbot" element={<Chatbot />} />
            <Route path="candidate/:id" element={<CandidateDetail />} />
         </Route>
