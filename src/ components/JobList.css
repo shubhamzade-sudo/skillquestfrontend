@@ -196,6 +196,15 @@ body, .joblist-root {
   transform: translateY(-6px);
   box-shadow: 0 16px 36px rgba(5, 5, 30, 0.12);
 }
+.job-card.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.job-card.disabled .delete-small,
+.job-card.disabled .edit-btn {
+  pointer-events: auto;
+  cursor: pointer;
+}
 
 /* Head */
 .job-card-head {

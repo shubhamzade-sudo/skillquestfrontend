@@ -7,18 +7,27 @@ const UploadCSV = () => {
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState(null);
+
+  const isCSV = uploadedFile && uploadedFile.name.toLowerCase().endsWith(".csv");
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      Papa.parse(file, {
-        header: true, // treat first row as header
-        skipEmptyLines: true,
-        complete: function (results) {
-          setColumns(Object.keys(results.data[0]));
-          setData(results.data);
-        },
-      });
+      setUploadedFile(file);
+      if (file.name.toLowerCase().endsWith(".csv")) {
+        Papa.parse(file, {
+          header: true,
+          skipEmptyLines: true,
+          complete: function (results) {
+            setColumns(Object.keys(results.data[0]));
+            setData(results.data);
+          },
+        });
+      } else {
+        setData([]);
+        setColumns([]);
+      }
     }
   };
 
@@ -32,7 +41,7 @@ const UploadCSV = () => {
 
   return (
     <div className="upload-container">
-      <h2>Upload Candidate CSV</h2>
+      <h2>Upload Resume</h2>
 
       <div className="upload-box">
         <div className="upload-content">
@@ -46,25 +55,36 @@ const UploadCSV = () => {
             </svg>
           </div>
           <div className="upload-instructions">
-            <div className="drag-text">Drag and drop file here</div>
-            <div className="detail-text">Limit 200MB per file, CSV only</div>
+            <div className="drag-text">
+              {uploadedFile ? uploadedFile.name : "Drag and drop file here"}
+            </div>
+            <div className="detail-text">Limit 200MB per file &bull; CSV, PDF, Word</div>
           </div>
-          <label className="upload-csv-btn">
-            Upload CSV
-            <input
-              type="file"
-              accept=".csv"
-              onChange={handleFileUpload}
-              className="file-input"
-              style={{ display: "none" }}
-            />
-          </label>
+          {uploadedFile ? (
+            <button
+              className="process-candidates-btn"
+              onClick={() => setModalOpen(true)}
+            >
+              Process Candidates
+            </button>
+          ) : (
+            <label className="upload-csv-btn">
+              Upload File
+              <input
+                type="file"
+                accept=".csv,.pdf,.doc,.docx"
+                onChange={handleFileUpload}
+                className="file-input"
+                style={{ display: "none" }}
+              />
+            </label>
+          )}
         </div>
       </div>
 
-      {/* Show table only after file uploaded */}
-      {data.length > 0 && <h3>Candidates Data</h3>}
-      {data.length > 0 && (
+      {/* Show table only for CSV uploads */}
+      {isCSV && data.length > 0 && <h3>Candidates Data</h3>}
+      {isCSV && data.length > 0 && (
         <div className="table-container">
           {/* ✅ Updated table with proper class */}
           <table className="candidate-table">
@@ -99,18 +119,14 @@ const UploadCSV = () => {
         </div>
       )}
 
-     {data.length > 0 && (
-  <button
-    className="process-candidates-btn"
-    onClick={() => setModalOpen(true)}
-  >
-    Process Candidates
-  </button>
-)}
-
       <ProcessCandidatesModal
         isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={() => {
+          setModalOpen(false);
+          setUploadedFile(null);
+          setData([]);
+          setColumns([]);
+        }}
       />
     </div>
   );

@@ -15,35 +15,35 @@ const Sidebar = () => {
           </NavLink>
 
 
-       
+
 
         </li>
 
 
 
-    <li>
+        {/* <li>
           <NavLink
             to="/dms"
             className={({ isActive }) => (isActive ? "active-link" : "")}
           >
             DMS
           </NavLink>
+        </li> */}
+        <li>
+          <NavLink
+            to="/upload"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+          >
+            JD upload
+          </NavLink>
         </li>
-   <li>
-            <NavLink
-              to="/upload"
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              JD upload
-            </NavLink>
-          </li>
-    
+
         <li>
           <NavLink
             to="/ingestion"
             className={({ isActive }) => (isActive ? "active-link" : "")}
           >
-            Ingestion page
+            Resume Upload
           </NavLink>
         </li>
 

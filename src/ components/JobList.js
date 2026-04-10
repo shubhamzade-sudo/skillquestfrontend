@@ -174,7 +174,9 @@ export default function JobList({ goToMatching }) {
 
   const isActionDisabled = (status, modelStatus) => {
     const ms = (modelStatus || "").toLowerCase();
-    return ms === "in-progress";
+    const s = (status || "").toLowerCase();
+    if (s === "closed" || ms === "done" || ms === "failed") return false;
+    return true;
   };
 
   return (
@@ -232,7 +234,7 @@ export default function JobList({ goToMatching }) {
             {filtered.map((job) => (
               <article
                 key={job.jd_id}
-                className={`job-card ${job.compact ? "compact" : ""}`}
+                className={`job-card ${job.compact ? "compact" : ""} ${isActionDisabled(job.status, job.model_status) ? "disabled" : ""}`}
                 onClick={() => {
                   if (!isActionDisabled(job.status, job.model_status)) {
                     goToMatching?.(job);
