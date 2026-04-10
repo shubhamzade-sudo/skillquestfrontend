@@ -1,6 +1,6 @@
 // MatchingEvaluation.jsx
 import React, { useState, useEffect, useRef } from "react";
-import { FiArrowLeft, FiDownload,FiChevronLeft } from "react-icons/fi";
+import { FiDownload } from "react-icons/fi";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import axios from "axios";
@@ -13,8 +13,7 @@ const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000";
 
 const MatchingEvaluation = ({ job, onBack }) => {
   console.log("MatchingEvaluation received job prop:", job);
-  const [topK, setTopK] = useState(5);
-  const [scoringMode, setScoringMode] = useState("default");
+  const topK = 5;
   const [getEvaluation, setGetEvaluation] = useState(false);
   const lastEvaluatedJobIdRef = useRef(null);
 

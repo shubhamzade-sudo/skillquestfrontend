@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { FiArrowLeft, FiDownload, FiChevronLeft } from "react-icons/fi";
+import { FiDownload, FiChevronLeft } from "react-icons/fi";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import "./CandidateDetail.css";

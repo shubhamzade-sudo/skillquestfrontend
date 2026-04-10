@@ -39,9 +39,7 @@ const CandidateCards = ({
 
       <div className="candidate-grid">
         {list.map((c, i) => {
-          const skills = c.skills_gaps ? c.skills_gaps.split(",").map((s) => s.trim()) : [];
           const name = nameMap[c.id] || `${c.id}`;
-          const role = roleMap[c.id] || c.recommendation || "—";
           const recText = c.recommended_training || "—";
 
           return (

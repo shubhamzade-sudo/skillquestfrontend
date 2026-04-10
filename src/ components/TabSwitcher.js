@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TextUploader from "../ components/TextUploader"
 import MatchingEvaluation from "../ components/MatchingEvaluation"
-import { FiArrowLeft, FiChevronLeft } from "react-icons/fi"; // react icon import
+import { FiChevronLeft } from "react-icons/fi"; // react icon import
 
 
 
