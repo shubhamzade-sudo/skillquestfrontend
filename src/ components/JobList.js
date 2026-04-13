@@ -133,7 +133,12 @@ export default function JobList({ goToMatching }) {
       closeModal();
     } catch (error) {
       console.error('Error saving job:', error);
-      alert(`Failed to save job: ${error.response?.data?.detail || error.message}`);
+      const status = error.response?.status;
+      if (status === 409 || status === 400 || status === 422) {
+        alert("JD already exists. Please try another JD ID.");
+      } else {
+        alert("JD already exists. Please try another JD ID.");
+      }
     }
   };
 
