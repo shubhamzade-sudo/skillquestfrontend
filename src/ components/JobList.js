@@ -121,8 +121,8 @@ export default function JobList({ goToMatching }) {
           jd_id: parseInt(jdId),
           title,
           description: desc,
-          status: "OPEN",
-          model_status: "IN-Progress"
+          status: "CLOSED",
+          model_status: "DONE"
         }, {
           headers: { 'Content-Type': 'application/json' }
         });

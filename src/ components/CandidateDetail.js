@@ -104,6 +104,40 @@ const CandidateDetail = () => {
         </p>
       </section>
 
+{/* 17,16,20 */}
+      {/* Current Allocation */}
+      {(() => {
+        const allocationMap = {
+          1438: [{ name: "Project 1", pct: 40 }, { name: "Project 2", pct: 60 }],
+          3468: [{ name: "Project 1", pct: 50 }, { name: "Project 2", pct: 50 }],
+          1851: [{ name: "Project 1", pct: 30 }, { name: "Project 2", pct: 70 }],
+          5402: [{ name: "Project 1", pct: 45 }, { name: "Project 2", pct: 55 }],
+          1655: [{ name: "Project 1", pct: 60 }, { name: "Project 2", pct: 40 }],
+          3785: [{ name: "Project 1", pct: 35 }, { name: "Project 2", pct: 65 }],
+          5159: [{ name: "Project 1", pct: 55 }, { name: "Project 2", pct: 45 }],
+          1878: [{ name: "Project 1", pct: 70 }, { name: "Project 2", pct: 30 }],
+          4604: [{ name: "Project 1", pct: 70 }, { name: "Project 2", pct: 30 }],
+          244: [{ name: "Project 1", pct: 70 }, { name: "Project 2", pct: 30 }],
+          3355: [{ name: "Project 1", pct: 70 }, { name: "Project 2", pct: 30 }],
+          4931: [{ name: "Project 1", pct: 70 }, { name: "Project 2", pct: 30 }]
+        };
+
+        console.log("Allocation Map", candidate);
+        const projects = allocationMap[Number(candidate.id)];
+        return (
+          <section>
+            <h3>Current Allocation</h3>
+            <div className="skills-tabs">
+              {projects
+                ? projects.map((p, i) => (
+                  <div key={i} className="tab">{p.name} — {p.pct}%</div>
+                ))
+                : <div className="tab">Bench — 100%</div>
+              }
+            </div>
+          </section>
+        );
+      })()}
 
       <section>
         <h3>skills Gaps</h3>
@@ -118,11 +152,11 @@ const CandidateDetail = () => {
         )}
       </section>
       <section className="training-section">
-        <div style={{ display: "flex", alignItems: "center",textAlign:"center", gap: 8 }}>
-          <StarIcon className="star-icon" /> 
-           <h3 style={{marginTop:"12px"}}>Recommended Training</h3>
+        <div style={{ display: "flex", alignItems: "center", textAlign: "center", gap: 8 }}>
+          <StarIcon className="star-icon" />
+          <h3 style={{ marginTop: "12px" }}>Recommended Training</h3>
         </div>
-       
+
         <div className="training-box">
           <p>{candidate.recommended_training}</p>
         </div>
