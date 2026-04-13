@@ -8,6 +8,7 @@ import { ReactComponent as StarIcon } from "../assets/idea_logo.svg";
 const CandidateCards = ({
   topK = 5,
   jd_id,
+  job,
   candidates = [],
   loading = false,
   error = null,
@@ -25,7 +26,7 @@ const CandidateCards = ({
   }, [candidates, topK]);
 
   const handleCardClick = (candidate) => {
-    navigate(`/candidate/${candidate.id}`, { state: { candidate } });
+    navigate(`/candidate/${candidate.id}`, { state: { candidate, selectedJob: job } });
   };
 
   return (

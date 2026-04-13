@@ -11,7 +11,16 @@ const CandidateDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const candidate = location.state?.candidate;
+  const selectedJob = location.state?.selectedJob;
   const contentRef = useRef(null);
+
+  const handleBack = () => {
+    if (selectedJob) {
+      navigate("/upload", { state: { selectedJob } });
+    } else {
+      navigate(-1);
+    }
+  };
 
   // PDF Export
   const handleDownloadPdf = async () => {
@@ -51,7 +60,7 @@ const CandidateDetail = () => {
   if (!candidate) {
     return (
       <div className="candidate-detail-root">
-        <button className="back-btn" onClick={() => navigate(-1)}>
+        <button className="back-btn" onClick={handleBack}>
           <FiChevronLeft size={20} />
         </button>
         <h2>Candidate not found</h2>
@@ -67,7 +76,7 @@ const CandidateDetail = () => {
       <div className="detail-header">
         {/* Left side */}
         <div className="title-with-back">
-          <button className="back-btn" onClick={() => navigate(-1)}>
+          <button className="back-btn" onClick={handleBack}>
             <FiChevronLeft size={25} color="#000000" />
           </button>
           <div className="header-inline">

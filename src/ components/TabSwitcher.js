@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import TextUploader from "../ components/TextUploader"
 import MatchingEvaluation from "../ components/MatchingEvaluation"
 import { FiChevronLeft } from "react-icons/fi"; // react icon import
@@ -6,9 +7,23 @@ import { FiChevronLeft } from "react-icons/fi"; // react icon import
 
 
 const TabSwitcher = ({ title = "Upload" }) => {
-  // "uploader" shows JD Upload, "matching" shows MatchingEvaluation
-  const [view, setView] = useState("uploader");
-  const [selectedJob, setSelectedJob] = useState(null);
+  const location = useLocation();
+
+  // Restore view & job from route state (when coming back from candidate detail)
+  const [view, setView] = useState(() =>
+    location.state?.selectedJob ? "matching" : "uploader"
+  );
+  const [selectedJob, setSelectedJob] = useState(() =>
+    location.state?.selectedJob || null
+  );
+
+  // If route state changes (e.g. navigating back), restore
+  useEffect(() => {
+    if (location.state?.selectedJob) {
+      setSelectedJob(location.state.selectedJob);
+      setView("matching");
+    }
+  }, [location.state]);
 
   // called by JobList when user clicks View
   const openMatching = (job) => {

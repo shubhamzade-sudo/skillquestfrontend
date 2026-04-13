@@ -226,6 +226,7 @@ const MatchingEvaluation = ({ job, onBack }) => {
           <CandidateCards
             topK={6}
             jd_id={job?.jd_id}
+            job={job}
             candidates={candidates}
             loading={candidatesLoading}
             error={candidatesError}
