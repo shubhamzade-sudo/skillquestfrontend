@@ -79,10 +79,10 @@ const CandidateCards = ({
                 </div> */}
 
                 {/* Row: Score */}
-                <div className="line">
+                {/* <div className="line">
                   <div className="label">Score:</div>
                   <div className="value score-value">{c.score ?? "—"}</div>
-                </div>
+                </div> */}
 
                 {/* Row: Recommended Training */}
                 <div className="line rec">

@@ -84,8 +84,8 @@ const CandidateDetail = () => {
             <span className="meta">{candidate.role}</span>
             <span className="sep">•</span>
             <span className="meta"> REQ ID: {candidate?.raw?.jd_id}</span>
-            <span className="sep">•</span>
-            <span className="meta score-pill">Score: {candidate.score}</span>
+            {/* <span className="sep">•</span> */}
+            {/* <span className="meta score-pill">Score: {candidate.score}</span> */}
           </div>
         </div>
 
