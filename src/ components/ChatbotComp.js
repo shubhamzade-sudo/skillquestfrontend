@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./ChatbotComp.css";
 
-const API_URL = "http://localhost:8000/cortex/ask";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 const ChatbotComp = () => {
   const [input, setInput] = useState("");
@@ -61,7 +61,7 @@ const ChatbotComp = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_URL}/cortex/ask`, {
         method: "POST",
         headers: {
           "Accept": "application/json",
