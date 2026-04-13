@@ -1,13 +1,15 @@
 .chatbot-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   background: #f9fafb;
+  overflow: hidden;
 }
 
 /* Messages scrollable */
 .chat-area {
   flex: 1;
+  min-height: 0;
   padding: 16px;
   overflow-y: auto;
   display: flex;
@@ -23,6 +25,8 @@
   font-size: 14px;
   line-height: 1.4;
   word-wrap: break-word;
+  overflow-wrap: break-word;
+  flex-shrink: 0;
 }
 
 /* User message (right corner) */
@@ -39,17 +43,18 @@
   background: #e5e7eb;
   color: #111827;
   border-bottom-left-radius: 4px;
+  max-width: 85%;
+  overflow-x: auto;
 }
 
 /* Input area fixed at bottom */
 .chatbot-input-box {
-  position: sticky;
-  bottom: 0;
   display: flex;
   gap: 8px;
   padding: 10px;
   background: #fff;
   border-top: 1px solid #e5e7eb;
+  flex-shrink: 0;
 }
 
 .chatbot-input {
@@ -79,4 +84,28 @@
 
 .chatbot-send:hover {
   background: #1e40af;
+}
+
+/* Data table inside bot messages */
+.chat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.chat-table th,
+.chat-table td {
+  border: 1px solid #d1d5db;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.chat-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+.chat-table tr:nth-child(even) {
+  background: #f9fafb;
 }

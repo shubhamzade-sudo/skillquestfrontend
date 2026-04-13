@@ -4,14 +4,10 @@ import ChatbotComp from "../ components/ChatbotComp";
 
 const ChatBot = () => {
   return (
-    <>
-    <div>
- <ChatbotComp/>
-
+    <div style={{ height: "100%" }}>
+      <ChatbotComp />
     </div>
-   
-    </>
-  )
+  );
 };
 
 export default ChatBot;
